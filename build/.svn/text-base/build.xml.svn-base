@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE project>
+<project name="BusLogicDemoPlay" default="createDeliverable">
+
+<!-- 
+	The master build file for the BusLogicDemoPlay project. This runs a complete build.
+-->
+	<import file="${ABL_BUILD_ROOT}/Scripts/env.xml"/>
+	
+	<!-- ======================================================================================= -->
+	<!-- Upload the install package to our web site -->
+	
+	<target name="uploadDailyBuild" depends="readBuildNumber" unless="skip.upload">		
+			
+		<!-- Upload deliverables -->
+		<myftp server="${upload_server}" userid="${upload_userid}" password="${upload_passwd}"
+			remotedir="/builds/daily/${build.number}-${build.date}/BusLogicDemoPlay" 
+			action="mkdir" />
+		<myftp server="${upload_server}" userid="${upload_userid}" password="${upload_passwd}"
+			remotedir="/builds/daily/${build.number}-${build.date}/BusLogicDemoPlay">
+			<fileset dir="${frameworks.build.root}">
+				<include name="BusLogicDemoPlay-${build.version}.zip" />
+				<include name="BusLogicDemoPlay-${build.version}.tar.gz" />
+			</fileset>
+		</myftp>
+		
+	</target>
+
+	<!-- ======================================================================================= -->
+	<!-- Create the project -->
+	
+	<target name="createDeliverable" depends="checkoutSource">
+
+		<mkdir dir="${buslogicdemoplay.build.root}/installPackage" />
+		<property name="buslogicdemoplay.install.dir" location="${buslogicdemoplay.build.root}/installPackage/BusLogicDemoPlay-${build.version}" />
+		<mkdir dir="${buslogicdemoplay.install.dir}" />
+
+		<copy todir="${buslogicdemoplay.install.dir}">
+			<fileset dir="${buslogicdemoplay.build.root}">
+				<include name="app/**/*" />
+				<include name="conf/**/*" />
+				<include name="public/**/*" />
+				<exclude name="**/.svn" />
+			</fileset>
+		</copy>
+		
+		<copy file="${buslogicdemoplay.build.root}/build/Readme.html" todir="${buslogicdemoplay.install.dir}" />
+		<replace file="${buslogicdemoplay.install.dir}/Readme.html" token="@@BUILDNUMBER@@" value="${build.number}" />
+		<replace file="${buslogicdemoplay.install.dir}/Readme.html" token="@@BUILDDATE@@" value="${build.date}" />
+
+		<zip destfile="${frameworks.build.root}/BusLogicDemoPlay-${build.version}.zip" 
+			basedir="${buslogicdemoplay.build.root}/installPackage" />
+		<tar destfile="${buslogicdemoplay.build.root}/BusLogicDemoPlay-${build.version}.tar" basedir="${buslogicdemoplay.build.root}/installPackage" />
+		<gzip src="${buslogicdemoplay.build.root}/BusLogicDemoPlay-${build.version}.tar" 
+			destfile="${frameworks.build.root}/BusLogicDemoPlay-${build.version}.tar.gz" />
+		<delete file="${buslogicdemoplay.build.root}/BusLogicDemoPlay-${build.version}.tar" />
+
+	</target>
+
+
+	<!-- ======================================================================================= -->
+	<!-- Check out the source from Subversion -->
+
+	<target name="checkoutSource" depends="readBuildNumber">
+		
+		<property name="buslogicdemoplay.build.root" location="${frameworks.build.root}/BusLogicDemoPlay" />
+	    <svn refid="svn.settings">
+			<checkout url="${svn.url.frameworks}/BusLogicDemoPlay" revision="HEAD" destPath="${buslogicdemoplay.build.root}" />
+	    </svn>
+		
+		<exec dir="${buslogicdemoplay.build.root}" executable="svn" output="svn_copy.log">
+		  <arg value="copy"/>
+		  <arg value="${svn.url.frameworks}/BusLogicDemoPlay"/>
+		  <arg value="${svn.url.frameworks}/dailybuilds/${build.year}/${build.number}/BusLogicDemoPlay"/>
+		  <arg value="-m"/>
+		  <arg value="'Daily build ${build.number}'"/>
+		  <arg value="--parents"/>
+		  <arg value="--username"/>
+		  <arg value="${svn.username}"/>
+		  <arg value="--password"/>
+		  <arg value="${svn.password}"/>
+		</exec>
+
+	</target>
+	
+	<target name="checkoutSource2" depends="readBuildNumber">
+		<property name="buslogicdemoplay.build.root" location="${frameworks.build.root}/BusLogicDemoPlay" />
+	</target>
+
+</project>

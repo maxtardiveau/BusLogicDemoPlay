@@ -1,3 +1,7 @@
+import java.io.ByteArrayOutputStream;
+import java.io.InputStream;
+import java.util.List;
+
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
@@ -24,6 +28,30 @@ public class Bootstrap extends Job {
 			System.out.println("Play.classes.getApplicationClass(\"models.Customer\") is null");
 		if (Play.classes.getApplicationClass("models.Customer").enhancedByteCode == null)
 			System.out.println("Play.classes.getApplicationClass(\"models.Customer\").enhancedByteCode is null");
+		
+		System.out.println("Attempting to load all classes...");
+		List<Class> allClasses = Play.classloader.getAllClasses();
+		System.out.println("Got all classes: " + allClasses);
+		if (Play.classes.getApplicationClass("models.Customer").enhancedByteCode == null)
+			System.out.println("enhancedByteCode is STILL null");
+		
+		InputStream inStr = Play.classloader.getResourceAsStream("/models/Customer.class");
+		if (inStr == null)
+			System.out.println("Play.classloader.getResourceAsStream returned null");
+		ByteArrayOutputStream baos = new ByteArrayOutputStream();
+		int b;
+		try {
+			while ((b = inStr.read()) != -1)
+				baos.write(b);
+		}
+		catch(Exception ex) {
+			ex.printStackTrace();
+			throw new RuntimeException("Error while reading class bytes");
+		}
+		
+		ClassLoaderManager.getInstance().defineClass("models.Customer", baos.toByteArray());
+
+		
 		ClassLoaderManager.getInstance().defineClass("models.Customer", 
 				Play.classes.getApplicationClass("models.Customer").enhancedByteCode);
 		ClassLoaderManager.getInstance().defineClass("models.PurchaseOrder", 

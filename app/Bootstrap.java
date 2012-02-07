@@ -9,6 +9,7 @@ import com.autobizlogic.abl.logic.analysis.ClassLoaderManager;
 
 import models.Customer;
 import play.Play;
+import play.classloading.ApplicationClasses.ApplicationClass;
 import play.db.jpa.JPA;
 import play.jobs.Job;
 import play.jobs.OnApplicationStart;
@@ -30,6 +31,11 @@ public class Bootstrap extends Job {
 //			System.out.println("Play.classes is null");
 //		if (Play.classes.getApplicationClass("models.Customer") == null)
 //			System.out.println("Play.classes.getApplicationClass(\"models.Customer\") is null");
+		List<ApplicationClass> appClasses = Play.classes.all();
+		for (ApplicationClass cls : appClasses) {
+			System.out.println("App class: " + cls);
+		}
+		
 		if (Play.classes.getApplicationClass("models.CustomerLogic").enhancedByteCode == null)
 			System.out.println("Play.classes.getApplicationClass(\"models.CustomerLogic\").enhancedByteCode is null");
 //		

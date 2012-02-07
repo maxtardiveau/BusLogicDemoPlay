@@ -10,6 +10,7 @@ import com.autobizlogic.abl.logic.analysis.ClassLoaderManager;
 import models.Customer;
 import play.Play;
 import play.classloading.ApplicationClasses.ApplicationClass;
+import play.classloading.BytecodeCache;
 import play.db.jpa.JPA;
 import play.jobs.Job;
 import play.jobs.OnApplicationStart;
@@ -53,6 +54,11 @@ public class Bootstrap extends Job {
 //		System.out.println("Attempting to load all classes...");
 		List<Class> allClasses = Play.classloader.getAllClasses();
 		System.out.println("Got all classes: " + allClasses);
+		
+		ApplicationClass applicationClass = Play.classes.getApplicationClass("models.Customer");
+		System.out.println("Got ApplicationClass: " + applicationClass);
+		byte[] bc = BytecodeCache.getBytecode("models.Customer", applicationClass.javaSource);
+		System.out.println("Got bytecode: " + bc.length);
 
 //		if (Play.classes == null)
 //			System.out.println("Play.classes is null");

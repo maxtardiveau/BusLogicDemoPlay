@@ -1,20 +1,12 @@
 package util;
 
-import java.io.ByteArrayOutputStream;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.FilenameFilter;
-import java.io.InputStream;
-
 import com.autobizlogic.abl.logic.analysis.ClassLoaderManager;
 
-import play.Play;
 import play.PlayPlugin;
 import play.classloading.ApplicationClasses;
 
 // For this to work properly on Heroku, you must be sure to disable production mode:
-// The issue is being caused due to the fact that Heroku precompile in a separate step on the platform. 
+// The issue is being caused due to the fact that Heroku precompiles in a separate step on the platform. 
 // You can disable this by editing your PLAY_OPTS environment variable: 
 // $ heroku config:remove PLAY_OPTS 
 // $ heroku config:add PLAY_OPTS=--%prod 

@@ -5,7 +5,7 @@
 		function update(custId, arg) {
 			if ( ! custId || custId == '')
 				custId = "${currentCustomer.id}";
-			window.location='index?custId=' + custId + '&' + arg;
+			window.location='/?custId=' + custId + '&' + arg;
 		}
 		
 		function showHelp() {
@@ -42,8 +42,9 @@
 
 <table border="0" cellspacing="10"><tr><td valign="top">
 
-#{if flash.error}
-    <p style="border: 2px solid #FF0000; background-color: #FFDDDD; padding: 4px;">${flash.error}</p>
+#{if errMsg}
+    <p style="border: 2px solid #FF0000; background-color: #FFDDDD; padding: 4px;">${errMsg} - 
+    <a href="@{Application.index(currentCustomer.id)}">click here to refresh</a></p>
 #{/if}
 
 <table border="0" cellspacing="5">
@@ -73,7 +74,7 @@
 				<li>Check/uncheck Order paid and notice how the Customer's balance changes
 				<li>Reassign an order to a different customer
 				<li>Change an order's description and notice how 
-					<a href="http://www.automatedbusinesslogic.com/overview#TOC-Execution-architected-for-high-perf">pruning</a>
+					<a href="http://www.automatedbusinesslogic.com/overview#TOC-Execution-architected-for-high-perf" target="Tutorial">pruning</a>
 					keeps the transaction to a bare minimum.
 			</ul>
 		</td>
@@ -130,7 +131,7 @@
 		<tr style="background-color: #CCCCCC;"><td colspan="6"><center>
 			Reassign this order to customer: #{ReassignCustomerSelect customers: customers, order: order, currentCustomer: currentCustomer /}
 			&nbsp;&nbsp;&nbsp;
-			<a href="index?custId=${currentCustomer.id}&verb=insert&type=LineItem&id=${order.id}">Create line item</a>
+			<a href="/?custId=${currentCustomer.id}&verb=insert&type=LineItem&id=${order.id}">Create line item</a>
 		</center></td></tr>
 		<tr><td colspan="5">&nbsp;</td></tr>
 	#{/list}
@@ -139,7 +140,7 @@
 	#{/if}
 	
 	<tr>
-		<td colspan="4"><a href="index?custId=${currentCustomer.id}&verb=insert&type=Order">Create new order</a></td>
+		<td colspan="4"><a href="/?custId=${currentCustomer.id}&verb=insert&type=Order">Create new order</a></td>
 		<td>
 		<input type="checkbox" id="showTxSummary" #{if session.get("showTxSummary") == "true"}checked#{/if} 
 				onchange="window.location = '@{Application.toggleTxSummary(currentCustomer.id)}&showTxSummary=' + this.checked; return false;"/>

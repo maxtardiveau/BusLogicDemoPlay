@@ -60,16 +60,50 @@ has-props
 
 4991
 
+ABL_logging.properties
+file
+137
+
+
+
+2012-02-07T02:03:52.000000Z
+e91eab59e11f713901aa594889dcc72e
+2012-02-07T09:49:53.662365Z
+137
+max@automatedbusinesslogic.com
+has-props
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+716
+
 application.conf
 file
-121
+137
 
 
 
-2012-02-06T00:14:00.000000Z
-c852a84faf9c56e7c7ef83f7265435c4
-2012-02-06T00:14:54.303209Z
-121
+2012-02-07T09:31:51.000000Z
+5b83b06a83c3628aff5c3656e02f8359
+2012-02-07T09:49:53.662365Z
+137
 max@automatedbusinesslogic.com
 
 
@@ -92,7 +126,7 @@ max@automatedbusinesslogic.com
 
 
 
-6720
+6771
 
 dependencies.yml
 file
@@ -100,7 +134,7 @@ file
 
 
 
-2012-02-06T22:26:03.000000Z
+2012-02-07T00:47:27.000000Z
 20432ce9fe8f4eab88478c59d0b12dca
 2012-02-06T22:26:09.076381Z
 131
@@ -162,6 +196,40 @@ max@automatedbusinesslogic.com
 
 2135
 
+log4j.properties
+file
+137
+
+
+
+2012-02-07T02:04:54.000000Z
+1e9cdea4001f4c115b582e6b7d0d5f09
+2012-02-07T09:49:53.662365Z
+137
+max@automatedbusinesslogic.com
+has-props
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+1509
+
 messages
 file
 
@@ -195,6 +263,40 @@ max@automatedbusinesslogic.com
 
 
 104
+
+play.plugins
+file
+137
+
+
+
+2012-02-07T01:24:34.000000Z
+fa8deb1809e36136d7de843e313326c0
+2012-02-07T09:49:53.662365Z
+137
+max@automatedbusinesslogic.com
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+21
 
 routes
 file

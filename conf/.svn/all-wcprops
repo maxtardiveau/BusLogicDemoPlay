@@ -7,7 +7,7 @@ application.conf
 K 25
 svn:wc:ra_dav:version-url
 V 95
-/AutomatedBusinessLogic/FrameworksDemos/svn/!svn/ver/121/BusLogicDemoPlay/conf/application.conf
+/AutomatedBusinessLogic/FrameworksDemos/svn/!svn/ver/137/BusLogicDemoPlay/conf/application.conf
 END
 dependencies.yml
 K 25
@@ -20,6 +20,24 @@ K 25
 svn:wc:ra_dav:version-url
 V 99
 /AutomatedBusinessLogic/FrameworksDemos/svn/!svn/ver/110/BusLogicDemoPlay/conf/ABLConfig.properties
+END
+ABL_logging.properties
+K 25
+svn:wc:ra_dav:version-url
+V 101
+/AutomatedBusinessLogic/FrameworksDemos/svn/!svn/ver/137/BusLogicDemoPlay/conf/ABL_logging.properties
+END
+play.plugins
+K 25
+svn:wc:ra_dav:version-url
+V 91
+/AutomatedBusinessLogic/FrameworksDemos/svn/!svn/ver/137/BusLogicDemoPlay/conf/play.plugins
+END
+log4j.properties
+K 25
+svn:wc:ra_dav:version-url
+V 95
+/AutomatedBusinessLogic/FrameworksDemos/svn/!svn/ver/137/BusLogicDemoPlay/conf/log4j.properties
 END
 routes
 K 25

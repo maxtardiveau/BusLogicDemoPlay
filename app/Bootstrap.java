@@ -23,11 +23,36 @@ public class Bootstrap extends Job {
         // Check if the database is empty
 		System.out.println("Bootstrap executing...");
 		
-		System.out.println("ClassLoader for Customer is : " + Customer.class.getClassLoader());
-		
+		System.out.println("ClassLoader for Customer is a: " + Customer.class.getClassLoader().getClass());
+		play.classloading.ApplicationClassloader cl = (play.classloading.ApplicationClassloader)Customer.class.getClassLoader();
+		System.out.println("ClassLoader for Customer is : " + cl);
+		InputStream is = Thread.currentThread().getContextClassLoader().getResourceAsStream("models/Customer.class");
+		if (is == null)
+			System.out.println("ContextClassLoad returned null stream for Customer");
+		is = Thread.currentThread().getContextClassLoader().getResourceAsStream("java/lang/Object.class");
+		if (is == null)
+			System.out.println("ContextClassLoad returned null stream for Object too");
+		else
+			System.out.println("We can get the bytes for Object, at least");
+
+		is = cl.getResourceAsStream("java/lang/Object.class");
+		if (is == null)
+			System.out.println("ContextClassLoad returned null stream for Object too");
+		else
+			System.out.println("We can get the bytes for Object2, at least");
+		is = cl.getResourceAsStream("models/Customer.class");
+		if (is == null)
+			System.out.println("ContextClassLoad returned null stream for Customer2");
+		else
+			System.out.println("We can get the bytes for Customer2");
+		Class<?> custCls = cl.loadApplicationClass("models.Customer");
+		System.out.println("loadApplicationClass returns: " + custCls);
+		if (Play.classes.getApplicationClass("models.Customer").enhancedByteCode == null)
+			System.out.println("Play.classes.getApplicationClass(\"models.Customer\").enhancedByteCode is null");
+
 //		System.out.println("Attempting to load all classes...");
-//		List<Class> allClasses = Play.classloader.getAllClasses();
-//		System.out.println("Got all classes: " + allClasses);
+		List<Class> allClasses = Play.classloader.getAllClasses();
+		System.out.println("Got all classes: " + allClasses);
 
 //		if (Play.classes == null)
 //			System.out.println("Play.classes is null");
@@ -51,21 +76,21 @@ public class Bootstrap extends Job {
 //			System.out.println("enhance() returns null");
 //		
 //		InputStream inStr = Play.classloader.getResourceAsStream("/models/Customer.class");
-		InputStream inStr = Customer.class.getClassLoader().getResourceAsStream("/models/Customer.class");
-		if (inStr == null)
-			System.out.println("getResourceAsStream returned null");
-		ByteArrayOutputStream baos = new ByteArrayOutputStream();
-		int b;
-		try {
-			while ((b = inStr.read()) != -1)
-				baos.write(b);
-		}
-		catch(Exception ex) {
-			ex.printStackTrace();
-			throw new RuntimeException("Error while reading class bytes");
-		}
-		
-		ClassLoaderManager.getInstance().defineClass("models.Customer", baos.toByteArray());
+//		InputStream inStr = getClass().getResourceAsStream("Customer.class");
+//		if (inStr == null)
+//			System.out.println("getResourceAsStream returned null");
+//		ByteArrayOutputStream baos = new ByteArrayOutputStream();
+//		int b;
+//		try {
+//			while ((b = inStr.read()) != -1)
+//				baos.write(b);
+//		}
+//		catch(Exception ex) {
+//			ex.printStackTrace();
+//			throw new RuntimeException("Error while reading class bytes");
+//		}
+//		
+//		ClassLoaderManager.getInstance().defineClass("models.Customer", baos.toByteArray());
 
 		
 //		ClassLoaderManager.getInstance().defineClass("models.Customer", 

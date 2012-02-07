@@ -18,13 +18,6 @@ import play.jobs.Job;
 import play.jobs.OnApplicationStart;
 import play.test.Fixtures;
 
-// For this to work properly on Heroku, you must be sure to disable precompilation:
-// The issue is being caused due to the fact that Heroku precompile in a separate step on the platform. 
-//You can disable this by editing your PLAY_OPTS environment variable: 
-// $ heroku config:remove PLAY_OPTS 
-// $ heroku config:add PLAY_OPTS=--%prod 
-// Alternatively, you can edit your Procfile to read: 
-// web: play run --http.port=$PORT --%prod 
 
 
 @OnApplicationStart
@@ -128,15 +121,15 @@ public class Bootstrap extends Job {
 //				Play.classes.getApplicationClass("models.PurchaseOrder").enhancedByteCode);
 //		ClassLoaderManager.getInstance().defineClass("models.LineItem", 
 //				Play.classes.getApplicationClass("models.LineItem").enhancedByteCode);
-		ClassLoaderManager.getInstance().defineClass("businesslogic.CustomerLogic", 
-				Play.classes.getApplicationClass("businesslogic.CustomerLogic").enhancedByteCode);
-		ClassLoaderManager.getInstance().defineClass("businesslogic.PurchaseOrderLogic", 
-				Play.classes.getApplicationClass("businesslogic.PurchaseOrderLogic").enhancedByteCode);
-		ClassLoaderManager.getInstance().defineClass("businesslogic.LineItemLogic", 
-				Play.classes.getApplicationClass("businesslogic.LineItemLogic").enhancedByteCode);
-		ClassLoaderManager.getInstance().defineClass("businesslogic.LogicObject", 
-				Play.classes.getApplicationClass("businesslogic.LogicObject").enhancedByteCode);
-		System.out.println("Bootstrap: pre-loaded logic classes OK");
+//		ClassLoaderManager.getInstance().defineClass("businesslogic.CustomerLogic", 
+//				Play.classes.getApplicationClass("businesslogic.CustomerLogic").enhancedByteCode);
+//		ClassLoaderManager.getInstance().defineClass("businesslogic.PurchaseOrderLogic", 
+//				Play.classes.getApplicationClass("businesslogic.PurchaseOrderLogic").enhancedByteCode);
+//		ClassLoaderManager.getInstance().defineClass("businesslogic.LineItemLogic", 
+//				Play.classes.getApplicationClass("businesslogic.LineItemLogic").enhancedByteCode);
+//		ClassLoaderManager.getInstance().defineClass("businesslogic.LogicObject", 
+//				Play.classes.getApplicationClass("businesslogic.LogicObject").enhancedByteCode);
+//		System.out.println("Bootstrap: pre-loaded logic classes OK");
 //		ClassLoaderManager.getInstance().defineClass("businesslogic.LogicObject", 
 //				Play.classes.getApplicationClass("businesslogic.LogicObject").enhancedByteCode);
 
@@ -147,7 +140,7 @@ public class Bootstrap extends Job {
         	catch(Exception ex) {
         		ex.printStackTrace();
         	}
-    		System.out.println("Loading bootstrap data...");
+    		System.out.println("Loaded bootstrap data...");
         }
     }
 }

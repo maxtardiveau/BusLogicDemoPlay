@@ -24,7 +24,7 @@ public class DemoPlugin extends PlayPlugin {
 		File clsDir = new File(TMP_BASE);
 		if (clsDir.exists()) {
 			System.out.println("Class cache found - loading bytecode");
-			readClassDir(clsDir);
+//			readClassDir(clsDir);
 		}
 		else
 			System.out.println("DemoPlugin: No class cache found");

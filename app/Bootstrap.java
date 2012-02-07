@@ -126,6 +126,8 @@ public class Bootstrap extends Job {
 				Play.classes.getApplicationClass("businesslogic.PurchaseOrderLogic").enhancedByteCode);
 		ClassLoaderManager.getInstance().defineClass("businesslogic.LineItemLogic", 
 				Play.classes.getApplicationClass("businesslogic.LineItemLogic").enhancedByteCode);
+		ClassLoaderManager.getInstance().defineClass("businesslogic.LogicObject", 
+				Play.classes.getApplicationClass("businesslogic.LogicObject").enhancedByteCode);
 		System.out.println("Bootstrap: pre-loaded logic classes OK");
 //		ClassLoaderManager.getInstance().defineClass("businesslogic.LogicObject", 
 //				Play.classes.getApplicationClass("businesslogic.LogicObject").enhancedByteCode);

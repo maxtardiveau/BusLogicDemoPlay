@@ -59,12 +59,16 @@ public class Bootstrap extends Job {
 //		
 		System.out.println("****************************************");
 		ApplicationClass applicationClass = Play.classes.getApplicationClass("models.Customer");
-		System.out.println("Got ApplicationClass: " + applicationClass);
-		byte[] bc = BytecodeCache.getBytecode("models.Customer", applicationClass.javaSource);
-		if (bc == null)
-			System.out.println("BytecodeCache.getBytecode returns null");
+		if (applicationClass.enhancedByteCode == null)
+			System.out.println("enhancedByteCode is null");
 		else
-			System.out.println("Got bytecode: " + bc.length);
+			System.out.println("enhancedByteCode is NOT null");
+//		System.out.println("Got ApplicationClass: " + applicationClass);
+//		byte[] bc = BytecodeCache.getBytecode("models.Customer", applicationClass.javaSource);
+//		if (bc == null)
+//			System.out.println("BytecodeCache.getBytecode returns null");
+//		else
+//			System.out.println("Got bytecode: " + bc.length);
 
 //		if (Play.classes == null)
 //			System.out.println("Play.classes is null");

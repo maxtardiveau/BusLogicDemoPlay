@@ -34,6 +34,8 @@ public class Bootstrap extends Job {
 		System.out.println("Got all classes: " + allClasses);
 		if (Play.classes.getApplicationClass("models.Customer").enhancedByteCode == null)
 			System.out.println("enhancedByteCode is STILL null");
+		if (Play.classes.getApplicationClass("models.Customer").enhance() == null)
+			System.out.println("enhance() returns null");
 		
 		InputStream inStr = Play.classloader.getResourceAsStream("/models/Customer.class");
 		if (inStr == null)

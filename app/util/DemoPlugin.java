@@ -19,7 +19,7 @@ public class DemoPlugin extends PlayPlugin {
 
 	@Override
 	public void onLoad() {
-		System.out.println("ABL DemoPlugin is loaded - current dir: " + System.getProperty("user.dir"));
+		System.out.println("ABL DemoPlugin is loaded 1 - current dir: " + System.getProperty("user.dir"));
 		
 		File clsDir = new File(TMP_BASE);
 		if (clsDir.exists()) {

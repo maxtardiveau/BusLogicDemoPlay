@@ -10,7 +10,7 @@ import play.classloading.ApplicationClasses;
 
 public class DemoPlugin extends PlayPlugin {
 	
-	private static final String TMP_BASE = "abltmp";
+	private static final String TMP_BASE = "/abltmp";
 
 	@Override
 	public void onLoad() {

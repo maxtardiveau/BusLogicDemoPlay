@@ -22,6 +22,10 @@ public class Bootstrap extends Job {
         // Check if the database is empty
 		System.out.println("Bootstrap executing...");
 		
+		System.out.println("Attempting to load all classes...");
+		List<Class> allClasses = Play.classloader.getAllClasses();
+		System.out.println("Got all classes: " + allClasses);
+
 //		if (Play.classes == null)
 //			System.out.println("Play.classes is null");
 //		if (Play.classes.getApplicationClass("models.Customer") == null)
@@ -29,9 +33,6 @@ public class Bootstrap extends Job {
 		if (Play.classes.getApplicationClass("models.CustomerLogic").enhancedByteCode == null)
 			System.out.println("Play.classes.getApplicationClass(\"models.CustomerLogic\").enhancedByteCode is null");
 //		
-//		System.out.println("Attempting to load all classes...");
-//		List<Class> allClasses = Play.classloader.getAllClasses();
-//		System.out.println("Got all classes: " + allClasses);
 //		if (Play.classes.getApplicationClass("models.Customer").enhancedByteCode == null)
 //			System.out.println("enhancedByteCode is STILL null");
 //		if (Play.classes.getApplicationClass("models.Customer").enhance() == null)

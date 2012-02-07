@@ -18,6 +18,14 @@ import play.jobs.Job;
 import play.jobs.OnApplicationStart;
 import play.test.Fixtures;
 
+// For this to work properly on Heroku, you must be sure to disable precompilation:
+// The issue is being caused due to the fact that Heroku precompile in a separate step on the platform. 
+//You can disable this by editing your PLAY_OPTS environment variable: 
+// $ heroku config:remove PLAY_OPTS 
+// $ heroku config:add PLAY_OPTS=--%prod 
+// Alternatively, you can edit your Procfile to read: 
+// web: play run --http.port=$PORT --%prod 
+
 
 @OnApplicationStart
 public class Bootstrap extends Job {

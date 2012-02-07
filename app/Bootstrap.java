@@ -57,12 +57,12 @@ public class Bootstrap extends Job {
 //		List<Class> allClasses = Play.classloader.getAllClasses();
 //		System.out.println("Got all classes: " + allClasses);
 //		
-		System.out.println("****************************************");
-		ApplicationClass applicationClass = Play.classes.getApplicationClass("models.Customer");
-		if (applicationClass.enhancedByteCode == null)
-			System.out.println("enhancedByteCode is null");
-		else
-			System.out.println("enhancedByteCode is NOT null");
+//		System.out.println("****************************************");
+//		ApplicationClass applicationClass = Play.classes.getApplicationClass("models.Customer");
+//		if (applicationClass.enhancedByteCode == null)
+//			System.out.println("enhancedByteCode is null");
+//		else
+//			System.out.println("enhancedByteCode is NOT null");
 //		System.out.println("Got ApplicationClass: " + applicationClass);
 //		byte[] bc = BytecodeCache.getBytecode("models.Customer", applicationClass.javaSource);
 //		if (bc == null)
@@ -91,27 +91,27 @@ public class Bootstrap extends Job {
 //		if (Play.classes.getApplicationClass("models.Customer").enhance() == null)
 //			System.out.println("enhance() returns null");
 //		
-		if (Play.usePrecompiled) {
-			File f = Play.getFile("precompiled/java/models/Customer.class");
-			if ( ! f.exists())
-				throw new RuntimeException("No such file: " + f.getAbsolutePath());
-			else
-				System.out.println("Precompiled file seems to exist: " + f.getAbsolutePath());
-			ByteArrayOutputStream baos = new ByteArrayOutputStream();
-			int b;
-			try {
-				InputStream inStr = new FileInputStream(f);
-				while ((b = inStr.read()) != -1)
-					baos.write(b);
-			}
-			catch(Exception ex) {
-				ex.printStackTrace();
-				throw new RuntimeException("Error while reading class bytes");
-			}
-			System.out.println("Attempting to define the class");
-			ClassLoaderManager.getInstance().defineClass("models.Customer", baos.toByteArray());
-			System.out.println("Class apparently defined");
-		}
+//		if (Play.usePrecompiled) {
+//			File f = Play.getFile("precompiled/java/models/Customer.class");
+//			if ( ! f.exists())
+//				throw new RuntimeException("No such file: " + f.getAbsolutePath());
+//			else
+//				System.out.println("Precompiled file seems to exist: " + f.getAbsolutePath());
+//			ByteArrayOutputStream baos = new ByteArrayOutputStream();
+//			int b;
+//			try {
+//				InputStream inStr = new FileInputStream(f);
+//				while ((b = inStr.read()) != -1)
+//					baos.write(b);
+//			}
+//			catch(Exception ex) {
+//				ex.printStackTrace();
+//				throw new RuntimeException("Error while reading class bytes");
+//			}
+//			System.out.println("Attempting to define the class");
+//			ClassLoaderManager.getInstance().defineClass("models.Customer", baos.toByteArray());
+//			System.out.println("Class apparently defined");
+//		}
 		
 
 //		ClassLoaderManager.getInstance().defineClass("models.Customer", 
@@ -120,12 +120,13 @@ public class Bootstrap extends Job {
 //				Play.classes.getApplicationClass("models.PurchaseOrder").enhancedByteCode);
 //		ClassLoaderManager.getInstance().defineClass("models.LineItem", 
 //				Play.classes.getApplicationClass("models.LineItem").enhancedByteCode);
-//		ClassLoaderManager.getInstance().defineClass("businesslogic.CustomerLogic", 
-//				Play.classes.getApplicationClass("businesslogic.CustomerLogic").enhancedByteCode);
-//		ClassLoaderManager.getInstance().defineClass("businesslogic.PurchaseOrderLogic", 
-//				Play.classes.getApplicationClass("businesslogic.PurchaseOrderLogic").enhancedByteCode);
-//		ClassLoaderManager.getInstance().defineClass("businesslogic.LineItemLogic", 
-//				Play.classes.getApplicationClass("businesslogic.LineItemLogic").enhancedByteCode);
+		ClassLoaderManager.getInstance().defineClass("businesslogic.CustomerLogic", 
+				Play.classes.getApplicationClass("businesslogic.CustomerLogic").enhancedByteCode);
+		ClassLoaderManager.getInstance().defineClass("businesslogic.PurchaseOrderLogic", 
+				Play.classes.getApplicationClass("businesslogic.PurchaseOrderLogic").enhancedByteCode);
+		ClassLoaderManager.getInstance().defineClass("businesslogic.LineItemLogic", 
+				Play.classes.getApplicationClass("businesslogic.LineItemLogic").enhancedByteCode);
+		System.out.println("Bootstrap: pre-loaded logic classes OK");
 //		ClassLoaderManager.getInstance().defineClass("businesslogic.LogicObject", 
 //				Play.classes.getApplicationClass("businesslogic.LogicObject").enhancedByteCode);
 

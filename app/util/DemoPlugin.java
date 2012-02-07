@@ -15,7 +15,7 @@ import play.classloading.ApplicationClasses;
 
 public class DemoPlugin extends PlayPlugin {
 	
-	private static final String TMP_BASE = "/tmp/abltmp";
+	private static final String TMP_BASE = "/app/abltmp";
 
 	@Override
 	public void onLoad() {
@@ -26,6 +26,8 @@ public class DemoPlugin extends PlayPlugin {
 			System.out.println("Class cache found - loading bytecode");
 			readClassDir(clsDir);
 		}
+		else
+			System.out.println("DemoPlugin: No class cache found");
 	}
 	
 	private void readClassDir(File dir) {

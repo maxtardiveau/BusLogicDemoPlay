@@ -6,13 +6,13 @@
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry kind="lib" path="/Users/maxtardiveau/ABL/Dev/Frameworks/Play/play-1.2.4/framework/play-1.2.4.jar" sourcepath="/Users/maxtardiveau/ABL/Dev/Frameworks/Play/play-1.2.4/framework/src" />
 	<classpathentry kind="lib" path="/Users/maxtardiveau/ABL/Dev/FrameworkDemos/Play/BusLogicDemoPlay/lib/asm-3.1.jar"/>
-	<classpathentry kind="lib" path="/Users/maxtardiveau/ABL/Dev/FrameworkDemos/Play/BusLogicDemoPlay/lib/autobizlogic-2.0.jar"/>
+	<classpathentry kind="lib" path="/Users/maxtardiveau/ABL/Dev/FrameworkDemos/Play/BusLogicDemoPlay/lib/autobizlogic-2.0.1.jar"/>
 	<classpathentry kind="lib" path="/Users/maxtardiveau/ABL/Dev/FrameworkDemos/Play/BusLogicDemoPlay/lib/bsf-api-3.1.jar"/>
 	<classpathentry kind="lib" path="/Users/maxtardiveau/ABL/Dev/FrameworkDemos/Play/BusLogicDemoPlay/lib/cglib-2.2.jar"/>
 	<classpathentry kind="lib" path="/Users/maxtardiveau/ABL/Dev/FrameworkDemos/Play/BusLogicDemoPlay/lib/commons-jexl-2.1.jar"/>
 	<classpathentry kind="lib" path="/Users/maxtardiveau/ABL/Dev/FrameworkDemos/Play/BusLogicDemoPlay/lib/hibernate-core-3.6.7.Final.jar"/>
 	<classpathentry kind="lib" path="/Users/maxtardiveau/ABL/Dev/FrameworkDemos/Play/BusLogicDemoPlay/lib/hibernate-entitymanager-3.6.7.Final.jar"/>
-	<classpathentry kind="lib" path="/Users/maxtardiveau/ABL/Dev/FrameworkDemos/Play/BusLogicDemoPlay/lib/javassist-3.12.0.GA.jar"/>
+	<classpathentry kind="lib" path="/Users/maxtardiveau/ABL/Dev/FrameworkDemos/Play/BusLogicDemoPlay/lib/javassist-3.15.0-GA.jar"/>
 	<classpathentry kind="lib" path="/Users/maxtardiveau/ABL/Dev/FrameworkDemos/Play/BusLogicDemoPlay/lib/json-simple-1.1.jar"/>
 	<classpathentry kind="lib" path="/Users/maxtardiveau/ABL/Dev/Frameworks/Play/play-1.2.4/framework/lib/activation-1.1.1.jar"/>
 	<classpathentry kind="lib" path="/Users/maxtardiveau/ABL/Dev/Frameworks/Play/play-1.2.4/framework/lib/antlr-2.7.6.jar"/>
@@ -41,7 +41,7 @@
 	<classpathentry kind="lib" path="/Users/maxtardiveau/ABL/Dev/Frameworks/Play/play-1.2.4/framework/lib/hibernate3.jar"/>
 	<classpathentry kind="lib" path="/Users/maxtardiveau/ABL/Dev/Frameworks/Play/play-1.2.4/framework/lib/ivy-2.2.0.jar"/>
 	<classpathentry kind="lib" path="/Users/maxtardiveau/ABL/Dev/Frameworks/Play/play-1.2.4/framework/lib/jamon-2.7.jar"/>
-	<classpathentry kind="lib" path="/Users/maxtardiveau/ABL/Dev/Frameworks/Play/play-1.2.4/framework/lib/javassist-3.15.0-GA.jar"/>
+	<classpathentry kind="lib" path="/Users/maxtardiveau/ABL/Dev/Frameworks/Play/play-1.2.4/framework/lib/javassist-3.9.0.GA.jar"/>
 	<classpathentry kind="lib" path="/Users/maxtardiveau/ABL/Dev/Frameworks/Play/play-1.2.4/framework/lib/javax.inject-1.0.jar"/>
 	<classpathentry kind="lib" path="/Users/maxtardiveau/ABL/Dev/Frameworks/Play/play-1.2.4/framework/lib/jaxen-1.1.jar"/>
 	<classpathentry kind="lib" path="/Users/maxtardiveau/ABL/Dev/Frameworks/Play/play-1.2.4/framework/lib/jj-imaging.jar"/>

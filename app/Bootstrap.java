@@ -18,6 +18,12 @@ public class Bootstrap extends Job {
         // Check if the database is empty
 		System.out.println("Bootstrap executing...");
 		
+		if (Play.classes == null)
+			System.out.println("Play.classes is null");
+		if (Play.classes.getApplicationClass("models.Customer") == null)
+			System.out.println("Play.classes.getApplicationClass(\"models.Customer\") is null");
+		if (Play.classes.getApplicationClass("models.Customer").enhancedByteCode == null)
+			System.out.println("Play.classes.getApplicationClass(\"models.Customer\").enhancedByteCode is null");
 		ClassLoaderManager.getInstance().defineClass("models.Customer", 
 				Play.classes.getApplicationClass("models.Customer").enhancedByteCode);
 		ClassLoaderManager.getInstance().defineClass("models.PurchaseOrder", 

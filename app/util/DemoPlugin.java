@@ -40,8 +40,10 @@ public class DemoPlugin extends PlayPlugin {
 			ClassLoaderManager.getInstance().defineClass(cls.name, cls.enhancedByteCode);
 			
 			File dir = new File(TMP_BASE);
-			if ( ! dir.exists())
-				dir.mkdir();
+			if ( ! dir.exists()) {
+				if ( ! dir.mkdir())
+					throw new RuntimeException("Unable to create temporary directory: " + TMP_BASE);
+			}
 			
 			String packDir = "";
 			String clsName = cls.name;

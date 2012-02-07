@@ -1,5 +1,7 @@
 package util;
 
+import com.autobizlogic.abl.logic.analysis.ClassLoaderManager;
+
 import play.PlayPlugin;
 import play.classloading.ApplicationClasses;
 
@@ -29,5 +31,9 @@ public class DemoPlugin extends PlayPlugin {
 	@Override
 	public void enhance(ApplicationClasses.ApplicationClass cls) {
 		System.out.println("Chance to enhance class: " + cls.name + ", bytecodes: " + (cls.enhancedByteCode == null ? "null" : "NOT NULL"));
+		if (cls.name.startsWith("businesslogic.") || cls.name.startsWith("models.")) {
+			System.out.println("Registering class with ABL: " + cls.name);
+			ClassLoaderManager.getInstance().defineClass(cls.name, cls.enhancedByteCode);
+		}
 	}
 }

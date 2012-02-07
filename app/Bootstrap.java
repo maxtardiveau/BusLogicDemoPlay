@@ -34,10 +34,10 @@ public class Bootstrap extends Job {
 		List<ApplicationClass> appClasses = Play.classes.all();
 		for (ApplicationClass cls : appClasses) {
 			System.out.print("App class: " + cls);
-			if (cls.enhancedByteCode == null)
-				System.out.println(" with null enhancedByteCode");
+			if (cls.javaByteCode == null)
+				System.out.println(" with null javaByteCode");
 			else
-				System.out.println(" with NOT NULL enhancedByteCode");
+				System.out.println(" with NOT NULL javaByteCode");
 		}
 		
 		if (Play.classes.getApplicationClass("models.CustomerLogic").enhancedByteCode == null)

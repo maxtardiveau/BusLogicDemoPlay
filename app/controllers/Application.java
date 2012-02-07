@@ -51,6 +51,7 @@ public class Application extends Controller {
 		// We want to know if there is a constraint violation on commit, that's why we commit here
 		// rather than let Play do it for us. There may be a better way of doing this, but I don't know
 		// Play well enough to determine that.
+		Flash.current().clear();
 		try {
 			JPA.em().getTransaction().commit();
 		}

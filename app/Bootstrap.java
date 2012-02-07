@@ -55,6 +55,7 @@ public class Bootstrap extends Job {
 		List<Class> allClasses = Play.classloader.getAllClasses();
 		System.out.println("Got all classes: " + allClasses);
 		
+		System.out.println("****************************************");
 		ApplicationClass applicationClass = Play.classes.getApplicationClass("models.Customer");
 		System.out.println("Got ApplicationClass: " + applicationClass);
 		byte[] bc = BytecodeCache.getBytecode("models.Customer", applicationClass.javaSource);

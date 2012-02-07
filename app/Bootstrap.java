@@ -22,44 +22,44 @@ public class Bootstrap extends Job {
         // Check if the database is empty
 		System.out.println("Bootstrap executing...");
 		
-		if (Play.classes == null)
-			System.out.println("Play.classes is null");
-		if (Play.classes.getApplicationClass("models.Customer") == null)
-			System.out.println("Play.classes.getApplicationClass(\"models.Customer\") is null");
-		if (Play.classes.getApplicationClass("models.Customer").enhancedByteCode == null)
-			System.out.println("Play.classes.getApplicationClass(\"models.Customer\").enhancedByteCode is null");
-		
-		System.out.println("Attempting to load all classes...");
-		List<Class> allClasses = Play.classloader.getAllClasses();
-		System.out.println("Got all classes: " + allClasses);
-		if (Play.classes.getApplicationClass("models.Customer").enhancedByteCode == null)
-			System.out.println("enhancedByteCode is STILL null");
-		if (Play.classes.getApplicationClass("models.Customer").enhance() == null)
-			System.out.println("enhance() returns null");
-		
-		InputStream inStr = Play.classloader.getResourceAsStream("/models/Customer.class");
-		if (inStr == null)
-			System.out.println("Play.classloader.getResourceAsStream returned null");
-		ByteArrayOutputStream baos = new ByteArrayOutputStream();
-		int b;
-		try {
-			while ((b = inStr.read()) != -1)
-				baos.write(b);
-		}
-		catch(Exception ex) {
-			ex.printStackTrace();
-			throw new RuntimeException("Error while reading class bytes");
-		}
-		
-		ClassLoaderManager.getInstance().defineClass("models.Customer", baos.toByteArray());
+//		if (Play.classes == null)
+//			System.out.println("Play.classes is null");
+//		if (Play.classes.getApplicationClass("models.Customer") == null)
+//			System.out.println("Play.classes.getApplicationClass(\"models.Customer\") is null");
+		if (Play.classes.getApplicationClass("models.CustomerLogic").enhancedByteCode == null)
+			System.out.println("Play.classes.getApplicationClass(\"models.CustomerLogic\").enhancedByteCode is null");
+//		
+//		System.out.println("Attempting to load all classes...");
+//		List<Class> allClasses = Play.classloader.getAllClasses();
+//		System.out.println("Got all classes: " + allClasses);
+//		if (Play.classes.getApplicationClass("models.Customer").enhancedByteCode == null)
+//			System.out.println("enhancedByteCode is STILL null");
+//		if (Play.classes.getApplicationClass("models.Customer").enhance() == null)
+//			System.out.println("enhance() returns null");
+//		
+//		InputStream inStr = Play.classloader.getResourceAsStream("/models/Customer.class");
+//		if (inStr == null)
+//			System.out.println("Play.classloader.getResourceAsStream returned null");
+//		ByteArrayOutputStream baos = new ByteArrayOutputStream();
+//		int b;
+//		try {
+//			while ((b = inStr.read()) != -1)
+//				baos.write(b);
+//		}
+//		catch(Exception ex) {
+//			ex.printStackTrace();
+//			throw new RuntimeException("Error while reading class bytes");
+//		}
+//		
+//		ClassLoaderManager.getInstance().defineClass("models.Customer", baos.toByteArray());
 
 		
-		ClassLoaderManager.getInstance().defineClass("models.Customer", 
-				Play.classes.getApplicationClass("models.Customer").enhancedByteCode);
-		ClassLoaderManager.getInstance().defineClass("models.PurchaseOrder", 
-				Play.classes.getApplicationClass("models.PurchaseOrder").enhancedByteCode);
-		ClassLoaderManager.getInstance().defineClass("models.LineItem", 
-				Play.classes.getApplicationClass("models.LineItem").enhancedByteCode);
+//		ClassLoaderManager.getInstance().defineClass("models.Customer", 
+//				Play.classes.getApplicationClass("models.Customer").enhancedByteCode);
+//		ClassLoaderManager.getInstance().defineClass("models.PurchaseOrder", 
+//				Play.classes.getApplicationClass("models.PurchaseOrder").enhancedByteCode);
+//		ClassLoaderManager.getInstance().defineClass("models.LineItem", 
+//				Play.classes.getApplicationClass("models.LineItem").enhancedByteCode);
 		ClassLoaderManager.getInstance().defineClass("businesslogic.CustomerLogic", 
 				Play.classes.getApplicationClass("businesslogic.CustomerLogic").enhancedByteCode);
 		ClassLoaderManager.getInstance().defineClass("businesslogic.PurchaseOrderLogic", 

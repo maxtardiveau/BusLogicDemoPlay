@@ -1,10 +1,15 @@
 package util;
 
+import java.io.ByteArrayOutputStream;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileOutputStream;
+import java.io.FilenameFilter;
+import java.io.InputStream;
 
 import com.autobizlogic.abl.logic.analysis.ClassLoaderManager;
 
+import play.Play;
 import play.PlayPlugin;
 import play.classloading.ApplicationClasses;
 
@@ -15,24 +20,59 @@ public class DemoPlugin extends PlayPlugin {
 	@Override
 	public void onLoad() {
 		System.out.println("ABL DemoPlugin is loaded - current dir: " + System.getProperty("user.dir"));
-	}
-	
-	@Override
-	public void compileAll(java.util.List<ApplicationClasses.ApplicationClass> classes) {
-		System.out.println("ABL plugin - compileAll");
-		System.out.print("Classes : " + classes);
-	}
-	
-	@Override
-	public java.util.List<ApplicationClasses.ApplicationClass> onClassesChange(java.util.List<ApplicationClasses.ApplicationClass> classes) {
-		System.out.println("ABL plugin - onClassChanges");
-		for (ApplicationClasses.ApplicationClass appCls : classes) {
-			System.out.println("Class changed: " + appCls.name + ", bytecodes: " + (appCls.enhancedByteCode == null ? "null" : "NOT NULL"));
+		
+		File clsDir = new File(TMP_BASE);
+		if (clsDir.exists()) {
+			System.out.println("Class cache found - loading bytecode");
+			readClassDir(clsDir);
 		}
-			
-		return classes;
 	}
 	
+	private void readClassDir(File dir) {
+		
+		File[] files = dir.listFiles();
+		for (File f : files) {
+			if ( ! f.isDirectory() && f.getName().endsWith(".class")) {
+				if (System.currentTimeMillis() - f.lastModified() > 30000) {
+					System.out.println("Class file " + f.getAbsolutePath() + " is too old -- skipping");
+					continue;
+				}
+				readClassFile(f);
+			}
+			else if (f.isDirectory()) {
+				readClassDir(f);
+			}
+		}
+
+	}
+	
+	private void readClassFile(File clsFile) {
+		System.out.println("Reading bytecode for cached class file: " + clsFile.getAbsolutePath());
+		FileInputStream inStr;
+		ByteArrayOutputStream baos = new ByteArrayOutputStream();
+		int b;
+		try {
+			inStr = new FileInputStream(clsFile);
+			while ((b = inStr.read()) != -1)
+				baos.write(b);
+		}
+		catch(Exception ex) {
+			ex.printStackTrace();
+			throw new RuntimeException("Error while reading class bytes for " + clsFile.getAbsolutePath());
+		}
+
+		String fname = clsFile.getAbsolutePath().substring(TMP_BASE.length() + 1);
+		fname = fname.substring(0, fname.length() - ".class".length());
+		fname = fname.replace('/', '.');
+
+		System.out.println("Defining class from cache: " + fname);
+		ClassLoaderManager.getInstance().defineClass(fname, baos.toByteArray());
+	}
+	
+	/**
+	 * This gets called at precompile time. We save the bytecode for the classes in the tmp
+	 * directory, to be read again when the app actually starts.
+	 */
 	@Override
 	public void enhance(ApplicationClasses.ApplicationClass cls) {
 		//System.out.println("Chance to enhance class: " + cls.name + ", bytecodes: " + (cls.enhancedByteCode == null ? "null" : "NOT NULL"));
@@ -55,7 +95,7 @@ public class DemoPlugin extends PlayPlugin {
 			}
 			File packFile = new File(TMP_BASE + "/" + packDir);
 			packFile.mkdirs();
-			File outFile = new File(TMP_BASE + "/" + packDir + "/" + clsName);
+			File outFile = new File(TMP_BASE + "/" + packDir + "/" + clsName + ".class");
 			try {
 				FileOutputStream outStr = new FileOutputStream(outFile);
 				outStr.write(cls.enhancedByteCode);

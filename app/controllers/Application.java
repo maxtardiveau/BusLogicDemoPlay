@@ -37,7 +37,7 @@ public class Application extends Controller {
     public static void index(String custId, String verb, String type, String id, String att, String value) {
     	
 		if (verb == null || verb.trim().length() == 0) {
-			showPage(custId);
+			showPage(custId, null);
 			return;
 		}
 		
@@ -51,19 +51,18 @@ public class Application extends Controller {
 		// We want to know if there is a constraint violation on commit, that's why we commit here
 		// rather than let Play do it for us. There may be a better way of doing this, but I don't know
 		// Play well enough to determine that.
-		Flash.current().clear();
+		String errMsg = null;
 		try {
 			JPA.em().getTransaction().commit();
 		}
 		catch(RollbackException ex) {
 			if (ex.getCause() != null && ex.getCause().getCause() != null && (ex.getCause().getCause() instanceof ConstraintException)) {
 				ConstraintException cex = (ConstraintException)ex.getCause().getCause();
-				Flash.current().error(cex.getMessage() + " - your last change has been rolled back.");
+				errMsg = cex.getMessage() + " - your last change has been rolled back.";
 			}
 		}
 		
-		showPage(custId);
-		Flash.current().clear();
+		showPage(custId, errMsg);
     }
     
     /**
@@ -73,7 +72,7 @@ public class Application extends Controller {
     public static void toggleTxSummary(String custId) {
 		session.put("showTxSummary", params.get("showTxSummary"));
 
-		showPage(custId);
+		showPage(custId, null);
     }
     
 	private static void processUpdate(String type, String id, String att, String value) {
@@ -176,7 +175,7 @@ public class Application extends Controller {
 		}
 	}
     
-    private static void showPage(String custId) {
+    private static void showPage(String custId, String errMsg) {
     	// Obviously this is inefficient -- the list of customer and products never changes,
     	// so we could cache it.
     	List<Customer> customers = Customer.find("order by name").fetch();
@@ -186,7 +185,7 @@ public class Application extends Controller {
     		currentCustomer = customers.get(0);
     	else
     		currentCustomer = Customer.findById(new Long(custId));
-        renderTemplate("Application/index.html", customers, currentCustomer, products);
+        renderTemplate("Application/index.html", customers, currentCustomer, products, errMsg);
     }
     
 	private static void setCurrentUseCaseName(String s) {

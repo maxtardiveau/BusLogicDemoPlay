@@ -14,7 +14,7 @@ public class DemoPlugin extends PlayPlugin {
 	
 	@Override
 	public void compileAll(java.util.List<ApplicationClasses.ApplicationClass> classes) {
-		System.out.println("ABL plugin - onClassChanges");
+		System.out.println("ABL plugin - compileAll");
 		System.out.print("Classes : " + classes);
 	}
 	

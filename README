@@ -1,0 +1,15 @@
+Bus Logic Demo (Play edition)
+	
+What is this?
+
+This project is a sample demonstrating the use of Automated Business Logic's transaction logic engine
+with the Play framework.
+
+To run it:
+
+    - get a copy of this project
+    - play dependencies
+    - play run
+    - connect to http://localhost:9000
+
+More information about this demo is available at http://www.automatedbusinesslogic.com/home/bus-logic-demo
